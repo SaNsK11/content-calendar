@@ -87,7 +87,7 @@
     /* ── Desktop grid ── */
     .calendar { overflow-x: auto; }
     .grid {
-      display: grid; grid-template-columns: 172px repeat(7, 1fr);
+      display: grid; grid-template-columns: 172px repeat(7, minmax(0, 1fr));
       gap: 1px; background: var(--border); border-radius: 12px;
       overflow: hidden; min-width: 860px;
     }
@@ -107,7 +107,7 @@
     }
     .platform-input::placeholder { color: var(--muted); }
     .platform-input:focus { background: var(--surface); border-radius: 4px; padding: 4px 6px; cursor: text; }
-    .content-cell { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .content-cell { padding: 10px; display: flex; flex-direction: column; gap: 6px; min-width: 0; overflow: hidden; }
     .content-cell.today-col { background: #131710; }
 
     /* ── Shared: count row + post rows ── */
@@ -122,7 +122,7 @@
     .count-num { font-size: 13px; font-weight: 700; min-width: 16px; text-align: center; }
     .count-num.zero { color: var(--muted); }
     .posts-label { font-size: 10px; color: var(--muted2); }
-    .post-row { display: flex; align-items: center; gap: 6px; }
+    .post-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
     .post-num { font-size: 10px; font-weight: 600; color: var(--muted2); min-width: 12px; text-align: right; flex-shrink: 0; }
     .post-note {
       flex: 1; min-width: 0; background: transparent; border: none;
