@@ -24,11 +24,9 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-      min-height: 100vh;
-      padding: 28px 24px;
+      min-height: 100vh; padding: 28px 24px;
     }
 
     /* ── Header ── */
@@ -38,11 +36,14 @@
     }
     .logo { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; color: var(--accent); }
     .logo span { color: var(--muted2); font-weight: 400; }
+
+    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
     .week-nav { display: flex; align-items: center; gap: 8px; }
     .nav-btn {
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--text); padding: 7px 14px; border-radius: 7px;
-      cursor: pointer; font-size: 13px; transition: background 0.1s; font-family: inherit;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+      padding: 7px 14px; border-radius: 7px; cursor: pointer; font-size: 13px;
+      transition: background 0.1s; font-family: inherit;
     }
     .nav-btn:hover { background: var(--border); }
     .today-btn {
@@ -52,6 +53,27 @@
     }
     .today-btn:hover { background: var(--surface2); color: var(--text); }
     .week-label { font-size: 13px; color: var(--muted2); min-width: 190px; text-align: center; }
+
+    /* ── Sync + backup ── */
+    .sync-status {
+      font-size: 11px; padding: 5px 10px; border-radius: 6px;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--muted2);
+      display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    }
+    .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted2); flex-shrink: 0; }
+    .sync-dot.synced  { background: var(--posted); }
+    .sync-dot.syncing { background: var(--scripting); }
+    .sync-dot.error   { background: var(--needs-edit); }
+
+    .backup-btns { display: flex; gap: 6px; }
+    .backup-btn {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--muted2);
+      padding: 5px 11px; border-radius: 6px; cursor: pointer; font-size: 12px;
+      transition: background 0.1s, color 0.1s; font-family: inherit;
+    }
+    .backup-btn:hover { background: var(--border); color: var(--text); }
+    .import-label { cursor: pointer; }
+    .import-label input { display: none; }
 
     /* ── Stats ── */
     .stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -70,16 +92,13 @@
       overflow: hidden; min-width: 860px;
     }
     .cell { background: var(--surface); }
-
     .day-header { background: var(--surface2); padding: 12px 8px; text-align: center; }
     .day-name { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted2); }
     .day-num { font-size: 20px; font-weight: 700; margin-top: 2px; line-height: 1; }
     .day-num.today { color: var(--accent); }
     .day-header.today-col { background: #1a1f12; }
-
     .platform-header { background: var(--surface2); padding: 12px 14px; display: flex; align-items: center; }
     .platform-header span { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); }
-
     .platform-cell { background: var(--surface2); display: flex; align-items: center; padding: 0 12px; border-right: 1px solid var(--border); }
     .platform-input {
       font-size: 12px; font-weight: 500; color: var(--text); width: 100%;
@@ -88,7 +107,6 @@
     }
     .platform-input::placeholder { color: var(--muted); }
     .platform-input:focus { background: var(--surface); border-radius: 4px; padding: 4px 6px; cursor: text; }
-
     .content-cell { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
     .content-cell.today-col { background: #131710; }
 
@@ -104,7 +122,6 @@
     .count-num { font-size: 13px; font-weight: 700; min-width: 16px; text-align: center; }
     .count-num.zero { color: var(--muted); }
     .posts-label { font-size: 10px; color: var(--muted2); }
-
     .post-row { display: flex; align-items: center; gap: 6px; }
     .post-num { font-size: 10px; font-weight: 600; color: var(--muted2); min-width: 12px; text-align: right; flex-shrink: 0; }
     .post-note {
@@ -123,7 +140,7 @@
       cursor: pointer; user-select: none; transition: opacity 0.1s, transform 0.1s; white-space: nowrap;
     }
     .status-badge:hover { opacity: 0.75; transform: scale(0.97); }
-    .status-none       { background: var(--surface2); color: var(--muted); border: 1px dashed var(--muted); }
+    .status-none       { background: var(--surface2); color: var(--muted);      border: 1px dashed var(--muted); }
     .status-scripting  { background: rgba(245,158,11,0.12); color: var(--scripting);   border: 1px solid rgba(245,158,11,0.3); }
     .status-scheduled  { background: rgba(96,165,250,0.12); color: var(--scheduled);   border: 1px solid rgba(96,165,250,0.3); }
     .status-posted     { background: rgba(74,222,128,0.12); color: var(--posted);      border: 1px solid rgba(74,222,128,0.3); }
@@ -139,10 +156,8 @@
     .legend-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted2); margin-right: 2px; }
     .legend-tip { margin-left: auto; font-size: 11px; color: var(--muted); }
 
-    /* ── Mobile view (hidden on desktop) ── */
+    /* ── Mobile view ── */
     .mobile-view { display: none; }
-
-    /* ── Day tabs (mobile) ── */
     .day-tabs {
       display: flex; gap: 6px; margin-bottom: 16px;
       overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch;
@@ -158,18 +173,9 @@
     .day-tab .tab-num  { font-size: 18px; font-weight: 700; margin-top: 1px; line-height: 1; }
     .day-tab.today-tab { border-color: var(--accent); color: var(--accent); }
     .day-tab.active    { background: var(--accent); color: #0d0d0d; border-color: var(--accent); }
-    .day-tab.active .tab-name,
-    .day-tab.active .tab-num  { color: #0d0d0d; }
-
-    /* ── Platform cards (mobile) ── */
-    .m-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; margin-bottom: 10px; overflow: hidden;
-    }
-    .m-card-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 14px; border-bottom: 1px solid var(--border); gap: 10px;
-    }
+    .day-tab.active .tab-name, .day-tab.active .tab-num { color: #0d0d0d; }
+    .m-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
+    .m-card-header { display: flex; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); gap: 10px; }
     .m-platform-input {
       font-size: 13px; font-weight: 600; color: var(--text); background: transparent;
       border: none; outline: none; cursor: pointer; font-family: inherit; flex: 1; min-width: 0;
@@ -178,23 +184,20 @@
     .m-card-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
     .m-empty { font-size: 12px; color: var(--muted); padding: 4px 0; }
 
-    /* ── Mobile-specific media query ── */
+    /* ── Mobile media query ── */
     @media (max-width: 640px) {
       body { padding: 16px 14px; }
-
       .header { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 16px; }
+      .header-right { width: 100%; justify-content: space-between; }
       .week-nav { width: 100%; justify-content: space-between; }
       .week-label { min-width: unset; font-size: 12px; }
-
       .stats { gap: 7px; margin-bottom: 16px; }
-      .stat  { padding: 10px 12px; min-width: 60px; flex: 1; }
+      .stat { padding: 10px 12px; min-width: 60px; flex: 1; }
       .stat-value { font-size: 20px; }
       .stat-label { font-size: 10px; }
-
       .calendar { display: none; }
       .mobile-view { display: block; }
       .legend { display: none; }
-
       .count-btn { width: 30px; height: 30px; font-size: 17px; }
     }
   </style>
@@ -203,22 +206,30 @@
 
 <div class="header">
   <div class="logo">Track <span>/ Content Calendar</span></div>
-  <div class="week-nav">
-    <button class="nav-btn" id="prevWeek">← Prev</button>
-    <div class="week-label" id="weekLabel"></div>
-    <button class="nav-btn" id="nextWeek">Next →</button>
-    <button class="today-btn" id="todayBtn">Today</button>
+  <div class="header-right">
+    <div class="week-nav">
+      <button class="nav-btn" id="prevWeek">← Prev</button>
+      <div class="week-label" id="weekLabel"></div>
+      <button class="nav-btn" id="nextWeek">Next →</button>
+      <button class="today-btn" id="todayBtn">Today</button>
+    </div>
+    <div class="sync-status" id="syncStatus">
+      <div class="sync-dot" id="syncDot"></div>
+      <span id="syncText">Connecting...</span>
+    </div>
+    <div class="backup-btns">
+      <button class="backup-btn" id="exportBtn">Export</button>
+      <label class="backup-btn import-label">Import <input type="file" id="importFile" accept=".json"></label>
+    </div>
   </div>
 </div>
 
 <div class="stats" id="stats"></div>
 
-<!-- Desktop grid -->
 <div class="calendar">
   <div class="grid" id="grid"></div>
 </div>
 
-<!-- Mobile day view -->
 <div class="mobile-view">
   <div class="day-tabs" id="dayTabs"></div>
   <div id="mobileCards"></div>
@@ -232,10 +243,27 @@
   <span class="status-badge status-posted">✓ Posted</span>
   <span class="status-badge status-updated">Updated</span>
   <span class="status-badge status-needs-edit">Needs Edit</span>
-  <span class="legend-tip">Click status to cycle &nbsp;·&nbsp; Type to describe a post &nbsp;·&nbsp; Click platform name to rename &nbsp;·&nbsp; Saved in browser</span>
+  <span class="legend-tip">Click status to cycle &nbsp;·&nbsp; Type to describe a post &nbsp;·&nbsp; Click platform name to rename &nbsp;·&nbsp; Synced via Firebase</span>
 </div>
 
-<script>
+<script type="module">
+  import { initializeApp }                        from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+  import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+
+  /* ── Firebase init ── */
+  const firebaseConfig = {
+    apiKey:            "AIzaSyBwlyV6BzDGPidtaTQKjNE4_7E4VVt9-pY",
+    authDomain:        "content-calendar--track.firebaseapp.com",
+    projectId:         "content-calendar--track",
+    storageBucket:     "content-calendar--track.firebasestorage.app",
+    messagingSenderId: "279157399197",
+    appId:             "1:279157399197:web:a560d133a5767af3603e74"
+  };
+  const app    = initializeApp(firebaseConfig);
+  const db     = getFirestore(app);
+  const docRef = doc(db, 'calendar', 'main');
+
+  /* ── Constants ── */
   const DAYS     = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const STATUSES = ['none', 'scripting', 'scheduled', 'posted', 'updated', 'needs-edit'];
   const STATUS_LABELS = {
@@ -246,7 +274,7 @@
     'updated':    'Updated',
     'needs-edit': 'Needs Edit',
   };
-  const NUM_PLATFORMS = 10;
+  const NUM_PLATFORMS     = 10;
   const DEFAULT_PLATFORMS = [
     'Instagram @track1', 'Instagram @track2',
     'Instagram @track3', 'Instagram @track4',
@@ -254,21 +282,79 @@
     'Platform 7', 'Platform 8', 'Platform 9', 'Platform 10',
   ];
 
-  let weekOffset = 0;
-  let selectedDay = todayDayIndex();
+  /* ── State ── */
+  let localData    = {};
+  let weekOffset   = 0;
+  let selectedDay  = todayDayIndex();
+  let saveTimer    = null;
+  let isSynced     = false;
+
+  /* ── Sync status UI ── */
+  function setSyncStatus(state, text) {
+    const dot  = document.getElementById('syncDot');
+    const span = document.getElementById('syncText');
+    dot.className  = 'sync-dot ' + state;
+    span.textContent = text;
+  }
+
+  /* ── Storage: in-memory + Firestore ── */
+  function load() { return localData; }
+
+  function save(data) {
+    localData = data;
+    // Keep localStorage as instant local backup
+    try { localStorage.setItem('cc_v3', JSON.stringify(data)); } catch {}
+    // Debounced Firestore write
+    setSyncStatus('syncing', 'Saving...');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      setDoc(docRef, { payload: JSON.stringify(data) })
+        .then(() => setSyncStatus('synced', 'Synced'))
+        .catch(() => setSyncStatus('error', 'Sync failed'));
+    }, 800);
+  }
+
+  /* ── Firebase real-time listener ── */
+  onSnapshot(docRef, (snap) => {
+    if (snap.exists()) {
+      try {
+        const remote = JSON.parse(snap.data().payload || '{}');
+        localData = remote;
+        try { localStorage.setItem('cc_v3', JSON.stringify(remote)); } catch {}
+      } catch {}
+    } else if (!isSynced) {
+      // First load: push any existing localStorage data up
+      try {
+        const cached = localStorage.getItem('cc_v3');
+        if (cached) { localData = JSON.parse(cached); save(localData); }
+      } catch {}
+    }
+    isSynced = true;
+    setSyncStatus('synced', 'Synced');
+    // Don't re-render while user is typing
+    const tag = document.activeElement?.tagName;
+    if (tag !== 'INPUT' && tag !== 'TEXTAREA') render();
+  }, () => {
+    setSyncStatus('error', 'Offline');
+    // Fall back to localStorage
+    try {
+      const cached = localStorage.getItem('cc_v3');
+      if (cached) localData = JSON.parse(cached);
+    } catch {}
+    render();
+  });
 
   /* ── Date helpers ── */
-
   function todayDayIndex() {
     const dow = new Date().getDay();
-    return dow === 0 ? 6 : dow - 1; // Mon=0 … Sun=6
+    return dow === 0 ? 6 : dow - 1;
   }
 
   function getMondayOf(offset) {
-    const now = new Date();
-    const dow = now.getDay();
+    const now  = new Date();
+    const dow  = now.getDay();
     const diff = dow === 0 ? -6 : 1 - dow;
-    const mon = new Date(now);
+    const mon  = new Date(now);
     mon.setDate(now.getDate() + diff + offset * 7);
     mon.setHours(0, 0, 0, 0);
     return mon;
@@ -295,25 +381,18 @@
     return `${dates[0].toLocaleDateString('en-US', o)} – ${dates[6].toLocaleDateString('en-US', o)}, ${dates[0].getFullYear()}`;
   }
 
-  /* ── Storage ── */
-
-  function load() {
-    try { return JSON.parse(localStorage.getItem('cc_v3') || '{}'); } catch { return {}; }
-  }
-  function save(data) { localStorage.setItem('cc_v3', JSON.stringify(data)); }
-
+  /* ── Data helpers ── */
   function getPlatforms() {
     const d = load();
-    if (!d.platforms || d.platforms.length !== NUM_PLATFORMS) {
-      d.platforms = [...DEFAULT_PLATFORMS]; save(d);
-    }
+    if (!d.platforms || d.platforms.length !== NUM_PLATFORMS) d.platforms = [...DEFAULT_PLATFORMS];
     return d.platforms;
   }
 
   function setPlatform(i, name) {
     const d = load();
     if (!d.platforms) d.platforms = [...DEFAULT_PLATFORMS];
-    d.platforms[i] = name; save(d);
+    d.platforms[i] = name;
+    save(d);
   }
 
   function getCell(wk, pi, di) {
@@ -325,24 +404,22 @@
     const d = load();
     if (!d[wk]) d[wk] = {};
     if (!d[wk][pi]) d[wk][pi] = {};
-    d[wk][pi][di] = cell; save(d);
+    d[wk][pi][di] = cell;
+    save(d);
   }
 
   /* ── Stats ── */
-
   function renderStats() {
     const wk = weekKey(weekOffset);
     let planned = 0, posted = 0, scheduled = 0, scripting = 0;
-    for (let p = 0; p < NUM_PLATFORMS; p++) {
-      for (let d = 0; d < 7; d++) {
+    for (let p = 0; p < NUM_PLATFORMS; p++)
+      for (let d = 0; d < 7; d++)
         (getCell(wk, p, d).posts || []).forEach(post => {
           planned++;
           if (post.status === 'posted')    posted++;
           if (post.status === 'scheduled') scheduled++;
           if (post.status === 'scripting') scripting++;
         });
-      }
-    }
     document.getElementById('stats').innerHTML = `
       <div class="stat"><div class="stat-value" style="color:var(--accent)">${planned}</div><div class="stat-label">Planned</div></div>
       <div class="stat"><div class="stat-value" style="color:var(--posted)">${posted}</div><div class="stat-label">Posted</div></div>
@@ -352,13 +429,11 @@
     `;
   }
 
-  /* ── Shared: build post rows for a cell ── */
-
+  /* ── Shared cell body builder ── */
   function buildCellBody(wk, pi, di, container, rerender) {
     const cell  = getCell(wk, pi, di);
     const posts = cell.posts || [];
 
-    /* count row */
     const cr    = el('div', 'count-row');
     const minus = el('button', 'count-btn'); minus.textContent = '−';
     minus.addEventListener('click', () => {
@@ -385,7 +460,6 @@
       container.appendChild(empty);
     }
 
-    /* per-post rows */
     posts.forEach((post, postIdx) => {
       const pr = el('div', 'post-row');
       const pn = el('span', 'post-num'); pn.textContent = postIdx + 1;
@@ -403,8 +477,7 @@
       });
 
       const noteInput = document.createElement('input');
-      noteInput.type = 'text';
-      noteInput.className = 'post-note';
+      noteInput.type = 'text'; noteInput.className = 'post-note';
       noteInput.placeholder = 'Post title or description...';
       noteInput.value = post.note || '';
       noteInput.addEventListener('change', e => {
@@ -420,37 +493,27 @@
   }
 
   /* ── Desktop render ── */
-
   function renderDesktop() {
-    const wk        = weekKey(weekOffset);
-    const dates     = getWeekDates(weekOffset);
-    const platforms = getPlatforms();
-    const grid      = document.getElementById('grid');
-    grid.innerHTML  = '';
+    const wk = weekKey(weekOffset), dates = getWeekDates(weekOffset), platforms = getPlatforms();
+    const grid = document.getElementById('grid'); grid.innerHTML = '';
 
-    /* corner */
-    const corner = el('div', 'cell platform-header');
-    corner.innerHTML = '<span>Platform</span>';
+    const corner = el('div', 'cell platform-header'); corner.innerHTML = '<span>Platform</span>';
     grid.appendChild(corner);
 
-    /* day headers */
     dates.forEach((date, di) => {
       const hdr = el('div', 'cell day-header' + (isToday(date) ? ' today-col' : ''));
       const dn  = el('div', 'day-name'); dn.textContent = DAYS[di];
       const num = el('div', 'day-num' + (isToday(date) ? ' today' : '')); num.textContent = date.getDate();
-      hdr.appendChild(dn); hdr.appendChild(num);
-      grid.appendChild(hdr);
+      hdr.appendChild(dn); hdr.appendChild(num); grid.appendChild(hdr);
     });
 
-    /* platform rows */
     platforms.forEach((name, pi) => {
       const pc  = el('div', 'cell platform-cell');
       const inp = document.createElement('input');
       inp.type = 'text'; inp.className = 'platform-input';
       inp.value = name; inp.placeholder = `Platform ${pi + 1}`;
       inp.addEventListener('change', e => setPlatform(pi, e.target.value));
-      pc.appendChild(inp);
-      grid.appendChild(pc);
+      pc.appendChild(inp); grid.appendChild(pc);
 
       for (let di = 0; di < 7; di++) {
         const cc = el('div', 'cell content-cell' + (isToday(dates[di]) ? ' today-col' : ''));
@@ -461,15 +524,10 @@
   }
 
   /* ── Mobile render ── */
-
   function renderMobile() {
-    const wk        = weekKey(weekOffset);
-    const dates     = getWeekDates(weekOffset);
-    const platforms = getPlatforms();
+    const wk = weekKey(weekOffset), dates = getWeekDates(weekOffset), platforms = getPlatforms();
 
-    /* day tabs */
-    const tabsEl = document.getElementById('dayTabs');
-    tabsEl.innerHTML = '';
+    const tabsEl = document.getElementById('dayTabs'); tabsEl.innerHTML = '';
     dates.forEach((date, di) => {
       let cls = 'day-tab';
       if (di === selectedDay) cls += ' active';
@@ -480,51 +538,65 @@
       tabsEl.appendChild(tab);
     });
 
-    /* platform cards */
-    const cardsEl = document.getElementById('mobileCards');
-    cardsEl.innerHTML = '';
+    const cardsEl = document.getElementById('mobileCards'); cardsEl.innerHTML = '';
     platforms.forEach((name, pi) => {
       const card   = el('div', 'm-card');
       const header = el('div', 'm-card-header');
-
       const nameInp = document.createElement('input');
       nameInp.type = 'text'; nameInp.className = 'm-platform-input';
       nameInp.value = name; nameInp.placeholder = `Platform ${pi + 1}`;
       nameInp.addEventListener('change', e => setPlatform(pi, e.target.value));
-
-      header.appendChild(nameInp);
-      card.appendChild(header);
-
+      header.appendChild(nameInp); card.appendChild(header);
       const body = el('div', 'm-card-body');
       buildCellBody(wk, pi, selectedDay, body, render);
-      card.appendChild(body);
-      cardsEl.appendChild(card);
+      card.appendChild(body); cardsEl.appendChild(card);
     });
   }
 
   /* ── Master render ── */
-
   function render() {
-    const dates = getWeekDates(weekOffset);
-    document.getElementById('weekLabel').textContent = fmtRange(dates);
-    renderStats();
-    renderDesktop();
-    renderMobile();
+    document.getElementById('weekLabel').textContent = fmtRange(getWeekDates(weekOffset));
+    renderStats(); renderDesktop(); renderMobile();
   }
 
   function el(tag, cls) {
-    const e = document.createElement(tag);
-    if (cls) e.className = cls;
-    return e;
+    const e = document.createElement(tag); if (cls) e.className = cls; return e;
   }
 
   /* ── Nav ── */
   document.getElementById('prevWeek').addEventListener('click', () => { weekOffset--; render(); });
   document.getElementById('nextWeek').addEventListener('click', () => { weekOffset++; render(); });
-  document.getElementById('todayBtn').addEventListener('click', () => {
-    weekOffset = 0; selectedDay = todayDayIndex(); render();
+  document.getElementById('todayBtn').addEventListener('click', () => { weekOffset = 0; selectedDay = todayDayIndex(); render(); });
+
+  /* ── Export ── */
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(load(), null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `content-calendar-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click(); URL.revokeObjectURL(a.href);
   });
 
+  /* ── Import ── */
+  document.getElementById('importFile').addEventListener('change', e => {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        save(data); render();
+        alert('Data imported successfully.');
+      } catch { alert('Invalid file. Please use a valid exported JSON backup.'); }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  /* ── Initial render (from localStorage while Firebase connects) ── */
+  try {
+    const cached = localStorage.getItem('cc_v3');
+    if (cached) localData = JSON.parse(cached);
+  } catch {}
   render();
 </script>
 </body>
